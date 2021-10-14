@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Course } from '../course';
+import { DidactisService } from '../didactis.service';
+
+
 
 @Component({
   selector: 'app-course-list',
@@ -7,14 +12,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CourseListComponent implements OnInit {
 
-  constructor() { console.log('courseListConstructor');
+  public courses:Course[] = [];
+
+
+  constructor(private service:DidactisService) { console.log('courseListConstructor');
   }
+
 
   ngOnInit(): void {
     console.log('ngOnInit CourseListComponent');
-
+    let obsCourses:Observable<Course[]> = this.service.getCourses();
+    obsCourses.subscribe({
+      next: cs => {
+        this.courses = cs;
+      },
+      error: err => console.log(err)
+    });
   }
-  courses = [
+
+
+  /* courses = [
     {
       id: 1,
       title: 'angular for dummies',
@@ -40,6 +57,6 @@ export class CourseListComponent implements OnInit {
       id: 5,
       title: 'java for dummies',
       description: 'java introduction'
-  };
+  }; */
 
 }
