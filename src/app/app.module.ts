@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { StudentListComponent } from './student/student-list/student-list.component';
 import { CourseListComponent } from './courses/course-list/course-list.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
